@@ -1,4 +1,3 @@
-import CheckBox from "@react-native-community/checkbox";
 import { StyleSheet, ViewStyle } from "react-native";
 
 const ViewChecked: ViewStyle = {
@@ -6,8 +5,9 @@ const ViewChecked: ViewStyle = {
   alignItems: "center",
   justifyContent: "center",
   padding: 16,
-  maxWidth: 56,
-  maxHeight: 54,
+  height: "100%",
+  borderStartEndRadius: 4,
+  borderStartStartRadius: 4,
 };
 
 export const styles = StyleSheet.create({
@@ -17,13 +17,15 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "row",
     borderRadius: 4,
-    height: 56,
+    maxHeight: 56,
+    marginBottom: 8,
+    width: "100%",
   },
   ContainerText: {
     backgroundColor: "#304163",
     padding: 16,
-    height: 54,
-    width: 250,
+    height: 56,
+    width: "68%",
   },
   ContentText: {
     color: "#FFFFFF",

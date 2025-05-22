@@ -1,17 +1,18 @@
 import { Text, TouchableOpacity } from "react-native";
-import { FontAwesome } from "@expo/vector-icons"; // Substituição do ícone
 import { styles } from "./styles";
 
 interface ButtonProps {
-  variant: "primary" | "secondary";
+  variant: "primary" | "secondary" | "tertiary";
   onPress: () => void;
   disabled?: boolean;
+  children?: React.ReactNode;
 }
 
-export function Button({ onPress, variant, disabled }: ButtonProps) {
+export function Button({ onPress, variant, disabled, children }: ButtonProps) {
   const buttonstyle = {
     primary: styles.buttonPrimary,
     secondary: styles.buttonSecondary,
+    tertiary: styles.buttonTertiary,
   };
   return (
     <TouchableOpacity
@@ -19,9 +20,7 @@ export function Button({ onPress, variant, disabled }: ButtonProps) {
       onPress={onPress}
       disabled={disabled}
     >
-      <Text style={styles.buttonText}>
-        <FontAwesome name="trash" size={24} color="#fff" />
-      </Text>
+      <Text style={styles.buttonText}>{children}</Text>
     </TouchableOpacity>
   );
 }

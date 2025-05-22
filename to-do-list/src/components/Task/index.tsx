@@ -1,16 +1,17 @@
 import { Text, View } from "react-native";
 import { Button } from "../Button";
+import { FontAwesome } from "@expo/vector-icons";
 import { styles } from "./styles";
 import { useState } from "react";
 import Checkbox from "expo-checkbox";
 
 interface TaskProps {
-  text: string;
+  title: string;
   onPress: () => void;
   checkedVariant: "checked" | "unchecked";
 }
 
-export function Task({ text, checkedVariant, onPress }: TaskProps) {
+export function Task({ title, checkedVariant, onPress }: TaskProps) {
   const [isSelected, setIsSelected] = useState(false);
   const checkedStyle = {
     checked: styles.ContainerChecked,
@@ -23,13 +24,16 @@ export function Task({ text, checkedVariant, onPress }: TaskProps) {
         <Checkbox
           value={isSelected}
           onValueChange={setIsSelected}
-          style={{ borderColor: "#FFFFFF" }}
+          style={{ borderColor: "#fff" }}
+          color="#fff"
         />
       </View>
       <View style={styles.ContainerText}>
-        <Text style={styles.ContentText}>{text}</Text>
+        <Text style={styles.ContentText}>{title}</Text>
       </View>
-      <Button variant="secondary" onPress={onPress} />
+      <Button variant="secondary" onPress={onPress}>
+        <FontAwesome name="trash" size={24} color="#fff" />
+      </Button>
     </View>
   );
 }

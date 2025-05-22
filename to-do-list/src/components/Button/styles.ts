@@ -7,7 +7,9 @@ const button: ViewStyle = {
   alignItems: "center",
   padding: 16,
   maxWidth: 56,
-  maxHeight: 54,
+  maxHeight: 56,
+  borderTopRightRadius: 4,
+  borderBottomRightRadius: 4,
 };
 
 export const styles = StyleSheet.create({
@@ -18,6 +20,10 @@ export const styles = StyleSheet.create({
   buttonSecondary: {
     ...button,
     backgroundColor: "#F22424",
+  },
+  buttonTertiary: {
+    ...button,
+    backgroundColor: "#1E1E1E",
   },
   buttonText: {
     color: "#fff",
