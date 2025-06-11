@@ -8,14 +8,16 @@ import Checkbox from "expo-checkbox";
 interface TaskProps {
   title: string;
   onPress: () => void;
-  checkedVariant: "checked" | "unchecked";
+  checkedVariant: "checked" | "unchecked" | "finalized";
+  onCheck: (title: string) => void;
 }
 
-export function Task({ title, checkedVariant, onPress }: TaskProps) {
+export function Task({ title, checkedVariant, onPress, onCheck }: TaskProps) {
   const [isSelected, setIsSelected] = useState(false);
   const checkedStyle = {
     checked: styles.ContainerChecked,
     unchecked: styles.ContainerUnchecked,
+    finalized: styles.ContainerFinalized,
   };
 
   return (
@@ -23,7 +25,10 @@ export function Task({ title, checkedVariant, onPress }: TaskProps) {
       <View style={checkedStyle[checkedVariant]}>
         <Checkbox
           value={isSelected}
-          onValueChange={setIsSelected}
+          onValueChange={()=>{
+            setIsSelected(!isSelected);
+            onCheck(title)
+          }}
           style={{ borderColor: "#fff" }}
           color="#fff"
         />

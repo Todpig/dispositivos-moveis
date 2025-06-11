@@ -6,9 +6,14 @@ import { styles } from "./styles";
 interface SectionTasksProps {
   title: string;
   tasks: TaskProps[];
+  handleCheckTask: (id: string) => void;
 }
 
-export function SectionTasks({ title, tasks }: SectionTasksProps) {
+export function SectionTasks({
+  title,
+  tasks,
+  handleCheckTask,
+}: SectionTasksProps) {
   return (
     <View style={styles.Container}>
       <Text style={styles.Title}>{title}</Text>
@@ -22,6 +27,7 @@ export function SectionTasks({ title, tasks }: SectionTasksProps) {
             checkedVariant={item.checkedVariant}
             title={item.title}
             onPress={item.onPress}
+            onCheck={() => handleCheckTask(item.id)}
           />
         )}
         showsVerticalScrollIndicator={false}

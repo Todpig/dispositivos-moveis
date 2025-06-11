@@ -48,6 +48,24 @@ export default function App() {
     setTasks((prevTasks) => [...prevTasks, newTask]);
   };
 
+  const handleCheckTask = (id: string) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === id
+          ? {
+              ...task,
+              checkedVariant:
+                task.checkedVariant === "unchecked"
+                  ? "checked"
+                  : task.checkedVariant === "checked"
+                  ? "finalized"
+                  : "unchecked",
+            }
+          : task
+      )
+    );
+  };
+
   return (
     <View style={styles.Container}>
       <View style={styles.MainContainer}>
@@ -74,11 +92,19 @@ export default function App() {
             key="unchecked"
             title="Em aberto:"
             tasks={filteredTasks.unchecked}
+            handleCheckTask={handleCheckTask}
           />
           <SectionTasks
             key="checked"
-            title="Finalizadas:"
+            title="Concluídas:"
             tasks={filteredTasks.checked}
+            handleCheckTask={handleCheckTask}
+          />
+          <SectionTasks
+            key="finalized"
+            title="Finalizadas:"
+            tasks={filteredTasks.finalized}
+            handleCheckTask={handleCheckTask}
           />
         </View>
       </View>

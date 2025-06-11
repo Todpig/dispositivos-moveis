@@ -34,6 +34,10 @@ export const styles = StyleSheet.create({
     ...ViewChecked,
     backgroundColor: "#0E9577",
   },
+  ContainerFinalized:{
+    ...ViewChecked,
+    backgroundColor: "#e1e1e6"
+  },
   ContainerUnchecked: {
     ...ViewChecked,
     backgroundColor: "#E88A1A",
