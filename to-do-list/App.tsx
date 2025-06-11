@@ -3,22 +3,36 @@ import { Card } from "./src/components/Card";
 import { SearchBar } from "./src/components/SearchBar";
 import { SectionTasks } from "./src/components/SectionTasks";
 import { TaskProps } from "./src/types/TaskProps";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+interface FilteredTasks {
+  checked: TaskProps[];
+  unchecked: TaskProps[];
+  finalized: TaskProps[];
+}
 
 export default function App() {
-  const [tasks, setTasks] = useState<TaskProps[]>([
-    {
-      id: "1",
-      title: "Estudar React Native",
-      checkedVariant: "checked",
-      onPress: () => handleRemoveTask("1"),
-    },
-  ]);
+  const [tasks, setTasks] = useState<TaskProps[]>([]);
+  const [filteredTasks, setFilteredTasks] = useState<FilteredTasks>({
+    checked: [],
+    unchecked: [],
+    finalized: [],
+  });
 
-  const filteredTasks = {
-    checked: tasks.filter((task) => task.checkedVariant === "checked"),
-    unchecked: tasks.filter((task) => task.checkedVariant === "unchecked"),
-  };
+  useEffect(() => {
+    const checked = tasks.filter((task) => task.checkedVariant === "checked");
+    const unchecked = tasks.filter(
+      (task) => task.checkedVariant === "unchecked"
+    );
+    const finalized = tasks.filter(
+      (task) => task.checkedVariant === "finalized"
+    );
+    setFilteredTasks({
+      checked,
+      unchecked,
+      finalized,
+    });
+  }, [tasks]);
 
   const handleRemoveTask = (id: string) => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
@@ -39,9 +53,21 @@ export default function App() {
       <View style={styles.MainContainer}>
         <SearchBar onPress={handleAddTask} />
         <View style={styles.Cards}>
-          <Card title="Cadastradas:" value={4} textVariant="registered" />
-          <Card title="Em aberto:" value={2} textVariant="pending" />
-          <Card title="Finalizadas:" value={2} textVariant="finalized" />
+          <Card
+            title="Cadastradas:"
+            value={filteredTasks.checked.length}
+            textVariant="registered"
+          />
+          <Card
+            title="Em aberto:"
+            value={filteredTasks.unchecked.length}
+            textVariant="pending"
+          />
+          <Card
+            title="Finalizadas:"
+            value={filteredTasks.finalized.length}
+            textVariant="finalized"
+          />
         </View>
         <View style={styles.TasksContainer}>
           <SectionTasks
